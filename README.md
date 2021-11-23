@@ -3,4 +3,4 @@
 ## Use Branch To checkout named-version
 
 1. v0.8.7
-2. v0.8.8 (coming soon)
+2. v0.8.10 (coming soon)
