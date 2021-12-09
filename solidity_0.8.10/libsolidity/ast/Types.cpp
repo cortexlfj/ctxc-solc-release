@@ -2907,6 +2907,8 @@ string FunctionType::richIdentifier() const
 	case Kind::BareCallCode: id += "barecallcode"; break;
 	case Kind::BareDelegateCall: id += "baredelegatecall"; break;
 	case Kind::BareStaticCall: id += "barestaticcall"; break;
+    case Kind::Infer: id += "infer"; break;
+	case Kind::InferArray: id += "inferArray"; break;
 	case Kind::Creation: id += "creation"; break;
 	case Kind::Send: id += "send"; break;
 	case Kind::Transfer: id += "transfer"; break;
@@ -3423,6 +3425,8 @@ bool FunctionType::isBareCall() const
 {
 	switch (m_kind)
 	{
+    case Kind::Infer:
+    case Kind::InferArray:
 	case Kind::BareCall:
 	case Kind::BareCallCode:
 	case Kind::BareDelegateCall:
@@ -3489,6 +3493,8 @@ bool FunctionType::isPure() const
 	// TODO: replace this with m_stateMutability == StateMutability::Pure once
 	//       the callgraph analyzer is in place
 	return
+        m_kind == Kind::Infer ||
+		m_kind == Kind::InferArray ||
 		m_kind == Kind::KECCAK256 ||
 		m_kind == Kind::ECRecover ||
 		m_kind == Kind::SHA256 ||
@@ -3621,6 +3627,8 @@ bool FunctionType::padArguments() const
 	// No padding only for hash functions, low-level calls and the packed encoding function.
 	switch (m_kind)
 	{
+    case Kind::Infer:
+    case Kind::InferArray:
 	case Kind::BareCall:
 	case Kind::BareCallCode:
 	case Kind::BareDelegateCall:
