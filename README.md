@@ -5,3 +5,18 @@
 1. v0.8.7
 2. v0.8.10
 3. v0.8.12 (coming soon)
+
+## How To Build
+
+### Build Binary
+``` bash
+mkdir build
+cd build
+cmake .. && make
+```
+
+### Build Js
+```bash
+./scripts/build_emscripten.sh
+```
+
