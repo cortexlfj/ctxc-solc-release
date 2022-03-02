@@ -8,14 +8,14 @@
 
 ## How To Build
 
-### Prerequisites
-1. install cmake
-2. install boost
+### Prerequisites (on ubuntu as below)
+1. install cmake: `apt install -y cmake`
+2. install other build tools
 ```bash
-wget https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.gz
-tar vxzf boost_1_78_0.tar.gz && cd boost_1_78_0
-./bootstrap.sh
-./b2
+apt-get -y install \
+           build-essential \
+           git \
+           libboost-all-dev
 ```
 
 ### Build Binary
