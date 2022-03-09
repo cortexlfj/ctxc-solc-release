@@ -25,7 +25,7 @@ cd build
 cmake -DUSE_Z3=OFF .. && make solc -j16
 ```
 
-### Build Js
+### Build Js (require docker and git folder, may takes > 30mins)
 ```bash
 ./scripts/build_emscripten.sh js_outdir
 ```
