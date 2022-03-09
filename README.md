@@ -27,6 +27,6 @@ cmake -DUSE_Z3=OFF .. && make solc -j16
 
 ### Build Js
 ```bash
-./scripts/build_emscripten.sh
+./scripts/build_emscripten.sh js_outdir
 ```
 
