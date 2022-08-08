@@ -4,7 +4,8 @@
 
 1. v0.8.7
 2. v0.8.10
-3. v0.8.12 (coming soon)
+3. v0.8.12
+4. v0.8.15 (coming soon)
 
 ## How To Build
 
@@ -28,5 +29,10 @@ cmake -DUSE_Z3=OFF .. && make solc -j16
 ### Build Js (require docker and git folder, may takes > 30mins)
 ```bash
 ./scripts/build_emscripten.sh js_outdir
+```
+
+## Source
+```bash
+curl -OL https://github.com/ethereum/solidity/releases/download/v0.8.15/solidity_0.8.15.tar.gz
 ```
 
