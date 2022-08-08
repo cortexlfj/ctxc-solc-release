@@ -621,6 +621,31 @@ bool ExpressionCompiler::visit(FunctionCall const& _functionCall)
 			"");
 		switch (function.kind())
 		{
+        case FunctionType::Kind::Infer:
+        {
+            arguments[2]->accept(*this);
+            utils().convertType(*arguments[2]->annotation().type, ArrayType(DataLocation::Memory), true);
+            // utils().convertType(*arguments[2]->annotation().type, ArrayType(DataLocation::Memory, IntegerType(256, IntegerType::Modifier::Unsigned).encodingType()), true);
+            arguments[1]->accept(*this);
+            // TODO: address is signed or unsigned?
+            utils().convertType(*arguments[1]->annotation().type, IntegerType(160, IntegerType::Modifier::Unsigned), true);
+            arguments[0]->accept(*this);
+            utils().convertType(*arguments[0]->annotation().type, IntegerType(160, IntegerType::Modifier::Unsigned), true);
+            m_context << Instruction::INFER;
+            break;
+        }
+        case FunctionType::Kind::InferArray:
+        {
+            arguments[2]->accept(*this);
+            utils().convertType(*arguments[2]->annotation().type, ArrayType(DataLocation::Memory), true);
+            //utils().convertType(*arguments[2]->annotation().type, ArrayType(DataLocation::Memory, IntegerType(256, IntegerType::Modifier::Unsigned).encodingType()), true);
+            arguments[1]->accept(*this);
+            utils().convertType(*arguments[1]->annotation().type, ArrayType(DataLocation::Storage), true);
+            arguments[0]->accept(*this);
+            utils().convertType(*arguments[0]->annotation().type, IntegerType(160, IntegerType::Modifier::Unsigned), true);
+            m_context << Instruction::INFERARRAY;
+            break;
+        }
 		case FunctionType::Kind::Declaration:
 			solAssert(false, "Attempted to generate code for calling a function definition.");
 			break;

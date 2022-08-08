@@ -61,6 +61,8 @@ int magicVariableToID(std::string const& _name)
 	else if (_name == "tx") return -26;
 	else if (_name == "type") return -27;
 	else if (_name == "this") return -28;
+    else if (_name == "infer") return -29;
+	else if (_name == "inferArray") return -30;
 	else
 		solAssert(false, "Unknown magic variable: \"" + _name + "\".");
 }
@@ -80,6 +82,35 @@ inline vector<shared_ptr<MagicVariableDeclaration const>> constructMagicVariable
 		magicVarDecl("ecrecover", TypeProvider::function(strings{"bytes32", "uint8", "bytes32", "bytes32"}, strings{"address"}, FunctionType::Kind::ECRecover, StateMutability::Pure)),
 		magicVarDecl("gasleft", TypeProvider::function(strings(), strings{"uint256"}, FunctionType::Kind::GasLeft, StateMutability::View)),
 		magicVarDecl("keccak256", TypeProvider::function(strings{"bytes memory"}, strings{"bytes32"}, FunctionType::Kind::KECCAK256, StateMutability::Pure)),
+
+        magicVarDecl("infer", TypeProvider::function(
+            TypePointers{
+                TypeProvider::address(),
+                TypeProvider::address(),
+                TypeProvider::array(DataLocation::Memory, TypeProvider::uint256()),
+            },
+            TypePointers{
+                TypeProvider::uint256(),
+            },
+            strings{"address","address","uint256[] memory"},
+            strings{"uint256"},
+            FunctionType::Kind::Infer, StateMutability::Pure
+        )),
+
+		magicVarDecl("inferArray", TypeProvider::function(
+            TypePointers{
+                TypeProvider::address(),
+                TypeProvider::array(DataLocation::Storage, TypeProvider::uint256()),
+                TypeProvider::array(DataLocation::Memory, TypeProvider::uint256()),
+            },
+            TypePointers{
+                TypeProvider::uint256(),
+            },
+            strings{"address","uint256[] storage","uint256[] memory"},
+            strings{"uint256"},
+            FunctionType::Kind::InferArray, StateMutability::Pure
+        )),
+
 		magicVarDecl("msg", TypeProvider::magic(MagicType::Kind::Message)),
 		magicVarDecl("mulmod", TypeProvider::function(strings{"uint256", "uint256", "uint256"}, strings{"uint256"}, FunctionType::Kind::MulMod, StateMutability::Pure)),
 		magicVarDecl("now", TypeProvider::uint256()),
