@@ -1,0 +1,4 @@
+outdir/
+.tmp/
+.torrent.db*
+.file.bolt.db
