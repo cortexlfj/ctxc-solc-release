@@ -5,7 +5,7 @@
 1. v0.8.7
 2. v0.8.10
 3. v0.8.12
-4. v0.8.15 (coming soon)
+4. v0.8.15
 
 ## How To Build
 
