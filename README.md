@@ -18,7 +18,7 @@ apt-get -y install \
            git \
            libboost-all-dev
 ```
-3. if error occurs as "git commit problem": move folder "solidity_0.8.x" to place outside this git repo, then `git init` again.
+3. if error occurs as "git commit problem": move folder "solidity_0.8.x" to place outside this git repo, then `git init .`, and `git add . && git commit -m "init"`, then build again.
 
 ### Build Binary
 ``` bash
